@@ -19,7 +19,7 @@ namespace Movies.DAL
             try
             {
                 con = dbs.Connect("myProjDB");
-                cmd = dbs.CreateCommand("sp_InsertMovie", con);
+                cmd = dbs.CreateCommand("sp_GetAllMovies", con);
 
                 SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
 

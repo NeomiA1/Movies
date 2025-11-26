@@ -14,10 +14,11 @@ namespace Movies.DAL
 
             string connectionString = configuration.GetConnectionString(conStringName);
 
-            SqlConnection con = new SqlConnection(connectionString);
+            SqlConnection con = new SqlConnection("myProjDB");
             con.Open();
             return con;
         }
+
 
         public SqlCommand CreateCommand(string storedProcedureName, SqlConnection con)
         {
