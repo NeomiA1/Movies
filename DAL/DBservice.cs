@@ -14,7 +14,7 @@ namespace Movies.DAL
 
             string connectionString = configuration.GetConnectionString(conStringName);
 
-            SqlConnection con = new SqlConnection("myProjDB");
+            SqlConnection con = new SqlConnection(connectionString);
             con.Open();
             return con;
         }
