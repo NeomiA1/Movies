@@ -23,11 +23,17 @@ namespace Movies.DAL
                 cmd.Parameters.AddWithValue("@Email", user.Email);
                 cmd.Parameters.AddWithValue("@Password", user.Password);
 
-                int numEff = cmd.ExecuteNonQuery();
-                return numEff > 0;
+                cmd.ExecuteNonQuery();
+                return true;
             }
-            catch (Exception)
+            catch (SqlException ex)
             {
+                if (ex.Message.Contains("Email already exists"))
+                    return false;
+
+                if (ex.Number == 2627 || ex.Number == 2601)
+                    return false;
+
                 throw;
             }
             finally
@@ -36,6 +42,7 @@ namespace Movies.DAL
                     con.Close();
             }
         }
+
 
         public User LoginUser(string email, string password)
         {
@@ -62,7 +69,7 @@ namespace Movies.DAL
                     return u;
                 }
                 reader.Close();
-                return null; 
+                return null;
             }
             catch (Exception)
             {

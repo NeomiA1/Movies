@@ -19,11 +19,15 @@ namespace Movies.Controllers
         }
 
         [HttpPost("login")]
-        public IActionResult Login([FromBody] User user)
+        public IActionResult Login([FromBody] LoginRequest req)
         {
-            User logged = dal.LoginUser(user.Email, user.Password);
-            if (logged == null) return Unauthorized();
+            User logged = dal.LoginUser(req.Email, req.Password);
+
+            if (logged == null)
+                return Unauthorized();
+
             return Ok(logged);
         }
+
     }
 }
